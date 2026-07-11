@@ -1,0 +1,34 @@
+package finalchance.demo;
+import jakarta.annotation.PostConstruct;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.MongoTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.client.RestTemplate;
+
+@SpringBootApplication
+@EnableTransactionManagement
+public class DemoApplication {
+	@Value("${spring.data.mongodb.uri}")
+	private String mongodbUri;
+
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+
+
+	@Bean
+	public PlatformTransactionManager add(MongoDatabaseFactory dbFactory){
+		return new MongoTransactionManager(dbFactory);
+	}
+
+	@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
+	}
+}
