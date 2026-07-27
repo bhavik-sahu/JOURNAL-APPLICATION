@@ -28,4 +28,10 @@ public class AdminController {
     public void createuser(@RequestBody User user){
         userService.saveAdmin(user);
     }
+
+    @DeleteMapping("/user/{username}")
+    public ResponseEntity<?> deleteUser(@PathVariable String username){
+        userService.deleteByUserName(username);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

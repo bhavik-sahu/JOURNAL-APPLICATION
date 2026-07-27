@@ -1,5 +1,7 @@
 package finalchance.demo.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import finalchance.demo.config.ObjectIdSerializer;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,6 +11,7 @@ import java.time.LocalDateTime;
 @Document(collection = "journal_entries")
 public class JournalEntry {
     @Id
+    @JsonSerialize(using = ObjectIdSerializer.class)
     private ObjectId id;
     private String title;
     private String content;

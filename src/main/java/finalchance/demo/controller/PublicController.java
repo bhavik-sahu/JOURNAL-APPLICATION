@@ -35,4 +35,10 @@ public ResponseEntity<?> createuser(@RequestBody User user){
             HttpStatus.BAD_REQUEST
     );
 }
+
+@PostMapping("/createadmin")
+public ResponseEntity<?> createadmin(@RequestBody User user){
+    userService.saveAdmin(user);
+    return new ResponseEntity<>("Admin user created successfully", HttpStatus.CREATED);
+}
 }
